@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Number Pyramid", "Number Pyramid\Number Pyramid.csproj", "{A727010F-B824-485B-AF8E-4AA2745FC902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equal Sums Of Even And Odd Positions", "Equal Sums Of Even And Odd Positions\Equal Sums Of Even And Odd Positions.csproj", "{30AB7144-C473-4BD9-9A5A-DDA78D493406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sum Of Prime And Non Prime Numbers", "Sum Of Prime And Non Prime Numbers\Sum Of Prime And Non Prime Numbers.csproj", "{E383B4EB-09E2-4A3D-B95A-6E5D01F71368}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A727010F-B824-485B-AF8E-4AA2745FC902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A727010F-B824-485B-AF8E-4AA2745FC902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A727010F-B824-485B-AF8E-4AA2745FC902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A727010F-B824-485B-AF8E-4AA2745FC902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30AB7144-C473-4BD9-9A5A-DDA78D493406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30AB7144-C473-4BD9-9A5A-DDA78D493406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30AB7144-C473-4BD9-9A5A-DDA78D493406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30AB7144-C473-4BD9-9A5A-DDA78D493406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E383B4EB-09E2-4A3D-B95A-6E5D01F71368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E383B4EB-09E2-4A3D-B95A-6E5D01F71368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E383B4EB-09E2-4A3D-B95A-6E5D01F71368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E383B4EB-09E2-4A3D-B95A-6E5D01F71368}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C19C506-C998-49F6-B9AA-8C3D5531FEB1}
+	EndGlobalSection
+EndGlobal
