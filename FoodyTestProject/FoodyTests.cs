@@ -1,5 +1,7 @@
+using FoodyTestProject.Models;
 using RestSharp;
 using RestSharp.Authenticators;
+using System.Net;
 using System.Text.Json;
 
 
@@ -7,7 +9,8 @@ namespace FoodyTestProject
 {
     public class FoodyTests
     {
-        private RestClient client; 
+        private RestClient client;
+        private static string foodId; 
 
         [OneTimeSetUp]
         public void Setup()
@@ -19,7 +22,7 @@ namespace FoodyTestProject
                 Authenticator=new JwtAuthenticator(accessToken)
             };           
             
-            this.client=new RestClient();
+            this.client=new RestClient(options);
         } 
 
         private string GetJwtToken (string username, string password)
@@ -50,9 +53,52 @@ namespace FoodyTestProject
         }
         [Order (1)]
         [Test]
-        public void Test1()
+
+        public void CreateFood_WithRequiredFields_ShouldSucceed()
         {
-            Assert.Pass();
+            // Arrange
+            var newFood = new FoodDTO
+            {
+                Name = "New Test Food",
+                Description = "Description",
+                Url = "",
+            };
+
+            var request = new RestRequest("/api/Food/Create", Method.Post);
+            request.AddJsonBody(newFood);
+
+            // Act
+            var response = this.client.Execute(request);
+
+            // Assert
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
+
+            var data = JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
+
+            Assert.That(data.FoodId, Is.Not.Empty);
+
+            foodId = data.FoodId;
         }
+        [Order (2)]
+        [Test]
+
+        public void Edit_The_Title_With_ValidCredantials_Should_Be_Succesfull ()
+        {
+            var request = new RestRequest($"/api/Food/Edit/ {foodId}");
+
+            request.AddJsonBody(new []
+            {
+                new
+                { 
+                    path="name",
+
+                }
+            });
+            
+
+
+        }
+
+
     }
 }

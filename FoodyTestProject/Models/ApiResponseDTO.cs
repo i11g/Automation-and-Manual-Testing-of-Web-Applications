@@ -13,6 +13,6 @@ namespace FoodyTestProject.Models
         public string Msg { get; set; }
 
         [JsonPropertyName("foodId")]
-        public string foodId { get; set; }
+        public string FoodId { get; set; }
     }
 }

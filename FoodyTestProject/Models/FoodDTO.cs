@@ -17,7 +17,7 @@ namespace FoodyTestProject.Models
         public string Description { get; set; }
 
         [JsonPropertyName("url")]
-        public string? Url { get; set; }
+        public string Url { get; set; }
 
     }
 }
