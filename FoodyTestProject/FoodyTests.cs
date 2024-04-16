@@ -10,35 +10,35 @@ namespace FoodyTestProject
     public class FoodyTests
     {
         private RestClient client;
-        private static string foodId; 
+        private static string foodId;
 
         [OneTimeSetUp]
         public void Setup()
         {
             string accessToken = GetJwtToken("ivan111", "123456");
-                
+
             var options = new RestClientOptions("http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com:86")
             {
-                Authenticator=new JwtAuthenticator(accessToken)
-            };           
-            
-            this.client=new RestClient(options);
-        } 
+                Authenticator = new JwtAuthenticator(accessToken)
+            };
 
-        private string GetJwtToken (string username, string password)
+            this.client = new RestClient(options);
+        }
+
+        private string GetJwtToken(string username, string password)
         {
             var tempClient = new RestClient("http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com:86");
 
             var request = new RestRequest("/api/User/Authentication", Method.Post);
             request.AddJsonBody(new
             {
-                userName=username,
-                password=password
+                userName = username,
+                password = password
             });
 
             var response = tempClient.Execute(request);
 
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 var content = JsonSerializer.Deserialize<JsonElement>(response.Content);
                 var accessToken = content.GetProperty("accessToken").GetString();
@@ -49,9 +49,9 @@ namespace FoodyTestProject
             {
                 throw new InvalidOperationException("AccessToken is empty or null");
             }
-            
+
         }
-        [Order (1)]
+        [Order(1)]
         [Test]
 
         public void CreateFood_WithRequiredFields_ShouldSucceed()
@@ -79,25 +79,34 @@ namespace FoodyTestProject
 
             foodId = data.FoodId;
         }
-        [Order (2)]
+        [Order(2)]
         [Test]
 
-        public void Edit_The_Title_With_ValidCredantials_Should_Be_Succesfull ()
+        public void Edit_The_Title_With_ValidCredantials_Should_Be_Succesfull()
         {
-            var request = new RestRequest($"/api/Food/Edit/ {foodId}");
+            var request = new RestRequest($"/api/Food/Edit/{foodId}", Method.Patch);
 
-            request.AddJsonBody(new []
+            request.AddJsonBody(new[]
             {
                 new
-                { 
-                    path="name",
+                {
+                    path="/name",
+                    op="replace",
+                    value="Edited value",
 
-                }
+                },
             });
-            
 
+            var response = this.client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            var content = JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
+
+            Assert.That(content.Msg, Is.EqualTo("Successfully edited"));
 
         }
+    
 
 
     }

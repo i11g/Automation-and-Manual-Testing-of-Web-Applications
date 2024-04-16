@@ -9,7 +9,7 @@ namespace FoodyTestProject.Models
 {
     public  class ApiResponseDTO
     {
-        [JsonPropertyName("message")]
+        [JsonPropertyName("Msg")]
         public string Msg { get; set; }
 
         [JsonPropertyName("foodId")]
