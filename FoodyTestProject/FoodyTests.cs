@@ -204,14 +204,15 @@ namespace FoodyTestProject
 
         public void Delete_Non_Existing_Food_Should_Return_Bad_Request ()
         {
-            var request = new RestRequest($"/api/Food/Delete{3000}", Method.Delete); 
+            var request = new RestRequest($"/api/Food/Delete/NNNNN", Method.Delete); 
 
             var response=this.client.Execute(request);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+            
             var content=JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
 
-            Assert.That(content.Message, Is.EqualTo("Unable to dlete this food revue!"));
+            Assert.That(content.Message, Is.EqualTo("Unable to delete this food revue!"));
 
         }
 
