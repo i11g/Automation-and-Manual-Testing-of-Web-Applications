@@ -17,6 +17,8 @@ namespace FoodyTestProject
         {
             string accessToken = GetJwtToken("ivan111", "123456");
 
+            
+
             var options = new RestClientOptions("http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com:86")
             {
                 Authenticator = new JwtAuthenticator(accessToken)
@@ -103,10 +105,115 @@ namespace FoodyTestProject
 
             var content = JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
 
-            Assert.That(content.Msg, Is.EqualTo("Successfully edited"));
+            Assert.That(content.Message, Is.EqualTo("Successfully edited"));
 
         }
-    
+
+        [Order(3)]
+        [Test] 
+        
+        public void Get_All_Foods_Should_Return_Correct_Foods ()
+        {    
+            //Aarrange
+            var request = new RestRequest("/api/Food/All", Method.Get); 
+
+            //Act
+            var  response = this.client.Execute(request);
+
+            //Assert 
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            var content=JsonSerializer.Deserialize<List<ApiResponseDTO>>(response.Content);
+
+            Assert.IsNotEmpty(content);
+
+        }
+
+        [Order(4)]
+        [Test] 
+
+        public void Delete_Food_With_Valid_Id_Should_Deleted_The_Food ()
+        {   
+            //Arrange
+            var request = new RestRequest($"/api/Food/Delete/{foodId}", Method.Delete); 
+
+            //Act
+            var response= this.client.Execute(request);
+
+            //Assert
+
+            var content = JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            Assert.That(content.Message, Is.EqualTo("Deleted successfully!"));
+
+        }
+
+        [Order(5)]
+        [Test] 
+
+        public void Create_Food_Without_Required_Fileds_Should_Return_Bad_Request ()
+        {
+            var newFood = new FoodDTO
+            {
+                Name = "New Name",
+                Description = "",
+                Url = "",
+            };
+
+            var request = new RestRequest("/api/Food/Create", Method.Post);
+
+            request.AddJsonBody(newFood);
+
+            var response = this.client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
+
+        [Order(6)]
+        [Test]
+
+        public void Edit_Non_Existing_Food_Should_Return_Not_Found () 
+        {
+            var request = new RestRequest($"/api/Food/Edit/{2000}", Method.Patch);
+
+            request.AddJsonBody(new[]
+            {
+                new
+                {
+                    path="/name",
+                    op="replace",
+                    value="Edited value",
+
+                },
+            });
+
+            var response = this.client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+
+            var content = JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
+
+            Assert.That(content.Message, Is.EqualTo("No food revues..."));
+        }
+
+        [Order(7)]
+        [Test]
+
+        public void Delete_Non_Existing_Food_Should_Return_Bad_Request ()
+        {
+            var request = new RestRequest($"/api/Food/Delete{3000}", Method.Delete); 
+
+            var response=this.client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+            var content=JsonSerializer.Deserialize<ApiResponseDTO>(response.Content);
+
+            Assert.That(content.Message, Is.EqualTo("Unable to dlete this food revue!"));
+
+        }
 
 
     }
