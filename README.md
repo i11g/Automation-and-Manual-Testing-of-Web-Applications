@@ -1,19 +1,19 @@
 # Testing of Web Application
-This repository includes three projects sumarizing a manual and aotomation testing of three different Web Applicaations provided by Soft Uni as part of     
+This repository includes three projects sumarizing a manual and automation testing of three different Web Applications provided by SoftUni as part of the 
+Back Ent Test Automation and QA Technologies and Manual Testing     
 
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
-* [Features](#features)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 * [License](#license) 
 
 ## General Information
-The Web App wa tested:
-- manual;
-- with RestSharp
-- Postman
+Three projects containing manual and automation testing of three different Web Applications.
+- Manual testing;
+- Integation testing with RestSharp;
+- Testing with Postman
   
 ## Technologies Used
 - C #, N Unit and .Net - version 8.0
