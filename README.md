@@ -1,5 +1,5 @@
 # Testing of Web Application
-This repository contains the tests and test suites developed during the testting of Web App Foody System. 
+This repository includes three projects sumarizing a manual and aotomation testing of three different Web Applicaations provided by Soft Uni as part of     
 
 ## Table of Contents
 * [General Info](#general-information)
