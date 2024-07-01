@@ -13,7 +13,7 @@ Back Ent Test Automation and QA Technologies and Manual Testing courses
 Three projects containing manual and automation testing of three different Web Applications.
 - Manual testing;
 - Integation testing with RestSharp;
-- Testing with Postman
+- API testing with Postman
   
 ## Technologies Used
 - C #, N Unit, Postman and .Net - version 8.0
